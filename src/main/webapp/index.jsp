@@ -12,5 +12,13 @@
   </head>
   <body>
   $END$
+  <div align="center">
+  <form action="/Servlet" method="get">
+    <input type="hidden" name="action" value="login">
+  USERNAME <input type="text" name="username"><br/>
+  PASSWORD <input type="text" name="password">
+    <button type="submit">login</button>
+  </form>
+  </div>
   </body>
 </html>
