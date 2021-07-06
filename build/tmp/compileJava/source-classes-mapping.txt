@@ -12,9 +12,9 @@ model/Order.java
  model.Order
 service/OrderDAO.java
  service.OrderDAO
-Servlet.java
- Servlet
 service/IPostDAO.java
  service.IPostDAO
+Servlet.java
+ Servlet
 service/PostDAO.java
  service.PostDAO

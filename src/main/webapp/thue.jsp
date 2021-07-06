@@ -16,7 +16,6 @@
         ID<input type="text" name="idOrder"><br/>
         Ngay thue <input type="text" name="ngaybatdau"><br/>
         Ngay tra <input type="text" name="ngayketthuc"><br/>
-        id<input type="text" value="<%=request.getParameter("id")%>"<br/>
         <button type="submit">submit</button>
     </form>
 </div>

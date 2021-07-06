@@ -63,6 +63,13 @@ public class Servlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "update":
+                try {
+                    showFormEdit(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             default:
                 try {
                     listPost(request, response);
@@ -70,7 +77,6 @@ public class Servlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
         }
-
     }
 
     @Override
@@ -91,6 +97,13 @@ public class Servlet extends HttpServlet {
             case "thue":
                 try {
                     thue(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "update":
+                try {
+                    update(request , response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -143,6 +156,15 @@ public class Servlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+
+    private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Post post = postDAO.selectPost(id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("edit.jsp");
+        request.setAttribute("post", post);
+        requestDispatcher.forward(request, response);
+    }
+
     void showFormLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
         requestDispatcher.forward(request, response);
@@ -173,7 +195,19 @@ public class Servlet extends HttpServlet {
         int ngayketthuc = Integer.parseInt(request.getParameter("ngayketthuc"));
         String username = user;
         orderDAO.insert(idOrder,idPost,ngaybatdau,ngayketthuc,username);
-        System.out.println("success");
         listPost(request,response);
     }
+    void update(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String title = request.getParameter("title");
+        int price = Integer.parseInt(request.getParameter("price"));
+        String address = request.getParameter("address");
+        String img = request.getParameter("img");
+        String describe = request.getParameter("describe");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        Post post = new Post(id, user, title,price,address,img,describe,status);
+        System.out.println(post);
+        postDAO.update(post);
+    }
+
 }

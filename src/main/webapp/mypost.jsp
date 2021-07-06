@@ -35,7 +35,7 @@
             <td>${post.describe}</td>
             <td>${post.status}</td>
 
-            <td><a href="Servlet?action=thue&id=${post.id}">edit</a></td>
+            <td><a href="Servlet?action=update&id=${post.id}">edit</a></td>
 
 
         </tr>

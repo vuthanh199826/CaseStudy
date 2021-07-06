@@ -10,4 +10,5 @@ public interface IPostDAO {
     void insert(Post post) throws SQLException;
     List<Post> getMyPost(String username) throws SQLException;
     Post selectPost(int id) throws SQLException;
+    boolean update(Post post) throws SQLException;
 }

@@ -93,9 +93,9 @@ public class PostDAO implements IPostDAO {
         Post post = null;
         Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select* from post where id = ?");
-        preparedStatement.setInt(1,id);
-        ResultSet resultSet =  preparedStatement.executeQuery();
-        while (resultSet.next()){
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
             String username = resultSet.getString("username");
             String title = resultSet.getString("title");
             int price = resultSet.getInt("price");
@@ -103,9 +103,24 @@ public class PostDAO implements IPostDAO {
             String img = resultSet.getString("img");
             String describe = resultSet.getString("describe");
             boolean status = resultSet.getBoolean("status");
-            post = new Post (id, username, title, price, address, img, describe, status);
+            post = new Post(id, username, title, price, address, img, describe, status);
         }
         return post;
+    }
+
+    @Override
+    public boolean update(Post post) throws SQLException {
+        boolean rowUpdate;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("update  post set title = ?, price = ?, address = ?, img = ? , post.describe = ?, post.status = ?");
+        preparedStatement.setString(1, post.getTitle());
+        preparedStatement.setInt(2, post.getPrice());
+        preparedStatement.setString(3, post.getAddress());
+        preparedStatement.setString(4, post.getImg());
+        preparedStatement.setString(5, post.getDescribe());
+        preparedStatement.setBoolean(6, post.isStatus());
+        rowUpdate = preparedStatement.executeUpdate() > 0;
+        return rowUpdate;
     }
 
 

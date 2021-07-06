@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
@@ -41,8 +42,8 @@
             <tr>
                 <th>Price:</th>
                 <td>
-                    <input type="text" name="price" size="15"
-                           value="<c:out value='${product.price}' />"
+                    <input type="text" name="address" size="15"
+                           value="<c:out value='${post.address}' />"
                     />
                 </td>
             </tr>
@@ -50,7 +51,7 @@
                 <th>IMG:</th>
                 <td>
                     <input type="text" name="img" size="15"
-                           value="<c:out value='${product.img}' />"
+                           value="<c:out value='${post.img}' />"
                     />
                 </td>
             </tr>
@@ -58,7 +59,15 @@
                 <th>Describe:</th>
                 <td>
                     <input type="text" name="describe" size="15"
-                           value="<c:out value='${product.describe}' />"
+                           value="<c:out value='${post.describe}' />"
+                    />
+                </td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>
+                    <input type="text" name="describe" size="15"
+                           value="<c:out value='${post.status}' />"
                     />
                 </td>
             </tr>

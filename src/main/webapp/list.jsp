@@ -52,7 +52,7 @@
             <td>${post.describe}</td>
             <td>${post.status}</td>
 
-                <td><a href="Servlet?action=thue&id=${post.id}">Thue</a></td>
+                <td><a href="Servlet?action=thue&id=${post.id}">Thue</a></td>x
 
 
         </tr>
