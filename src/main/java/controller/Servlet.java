@@ -1,7 +1,9 @@
 package controller;
 
+import model.Comment;
 import model.Order;
 import model.Post;
+import service.CommentDAO;
 import service.OrderDAO;
 import service.PostDAO;
 import service.UserDAO;
@@ -21,11 +23,13 @@ public class Servlet extends HttpServlet {
     private PostDAO postDAO;
     private UserDAO userDAO;
     private OrderDAO orderDAO;
+    private CommentDAO commentDAO;
 
     public void init() {
         postDAO = new PostDAO();
         userDAO = new UserDAO();
         orderDAO = new OrderDAO();
+        commentDAO = new CommentDAO();
     }
 
     @Override
@@ -53,35 +57,42 @@ public class Servlet extends HttpServlet {
                 break;
             case "order":
                 try {
-                    showFormOrder(request,response);
+                    showFormOrder(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "mypost":
                 try {
-                    showFormMyPost(request,response);
+                    showFormMyPost(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "update":
                 try {
-                    showFormEdit(request,response);
+                    showFormEdit(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "delete":
                 try {
-                    deletePost(request,response);
+                    deletePost(request, response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "apply":
                 try {
-                    applyOrder(request,response);
+                    applyOrder(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "showComment":
+                try {
+                    showComment(request,response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -119,7 +130,14 @@ public class Servlet extends HttpServlet {
                 break;
             case "update":
                 try {
-                    update(request , response);
+                    update(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "createComment":
+                try {
+                    createComment(request,response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -130,6 +148,7 @@ public class Servlet extends HttpServlet {
     }
 
     void listPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+
         List<Post> posts = postDAO.getAllPost();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
         request.setAttribute("posts", posts);
@@ -140,11 +159,12 @@ public class Servlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         boolean status = userDAO.login(username, password);
-        System.out.println(user);
         if (status) {
             user = request.getParameter("username");
             System.out.println(user);
-            listPost(request, response);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Posts");
+            requestDispatcher.forward(request,response);
+//            listPost(request, response);
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
             requestDispatcher.forward(request, response);
@@ -170,7 +190,7 @@ public class Servlet extends HttpServlet {
     void showFormOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("order.jsp");
         List<Order> orders = orderDAO.allOrder(user);
-        request.setAttribute("orders" ,orders);
+        request.setAttribute("orders", orders);
         requestDispatcher.forward(request, response);
     }
 
@@ -213,9 +233,10 @@ public class Servlet extends HttpServlet {
         int ngayketthuc = Integer.parseInt(request.getParameter("ngayketthuc"));
         String status = request.getParameter("status");
         String username = user;
-        orderDAO.insert(idOrder,idPost,ngaybatdau,ngayketthuc,username,status);
-        listPost(request,response);
+        orderDAO.insert(idOrder, idPost, ngaybatdau, ngayketthuc, username, status);
+        listPost(request, response);
     }
+
     void update(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
@@ -224,7 +245,7 @@ public class Servlet extends HttpServlet {
         String img = request.getParameter("img");
         String describe = request.getParameter("describe");
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        Post post = new Post(id, user, title,price,address,img,describe,status);
+        Post post = new Post(id, user, title, price, address, img, describe, status);
         System.out.println(post);
         postDAO.update(post);
     }
@@ -232,19 +253,38 @@ public class Servlet extends HttpServlet {
     void deletePost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         postDAO.delete(id);
-        showFormMyPost(request,response);
+        showFormMyPost(request, response);
     }
 
     void applyOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int idPost = Integer.parseInt( request.getParameter("idPost"));
+        int idPost = Integer.parseInt(request.getParameter("idPost"));
 
         int id = Integer.parseInt(request.getParameter("id"));
 
         postDAO.apply(idPost);
         orderDAO.applyOrder(id);
-        showFormOrder(request,response);
+        showFormOrder(request, response);
     }
 
+
+    void createComment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int idPost = Integer.parseInt(request.getParameter("idPost"));
+        String username = user;
+        String detail = request.getParameter("detail");
+        Comment comment = new Comment(idPost,username,detail);
+        if (detail.equals("")){
+        }else {
+            commentDAO.insert(comment);
+        }
+        showComment(request,response);
+    }
+
+    void showComment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int idPost = Integer.parseInt(request.getParameter("idPost"));
+        List<Comment> comments = commentDAO.commentOfPost(idPost);
+        request.setAttribute("comments",comments);
+        listPost(request,response);
+    }
 
 
 }

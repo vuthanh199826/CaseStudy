@@ -22,8 +22,8 @@
 <div align="center">
     list post
     <a href="/Servlet?action=order">My order</a>
-    <a href="/Servlet?action=mypost">My posts</a>
-    <a href="/Servlet?action=create">Create post</a>
+    <a href="/Posts?action=mypost">My posts</a>
+    <a href="/Posts?action=create">Create post</a>
 <%--    <form method="get">--%>
 <%--        <input type="hidden" name="action" value="create">--%>
 <%--        <input type="hidden" name="username" value="">--%>
@@ -51,6 +51,34 @@
             <td><img width="150px" height="150px" src="${post.img}"></td>
             <td>${post.describe}</td>
             <td>${post.status}</td>
+            <td>
+                <a href="/Servlet?action=showComment&idPost=${post.id}">cmt</a>
+                <table border="1">
+                    <tr>
+                        <td>ID</td>
+                        <td>IDPOST</td>
+                        <td>USERNAME</td>
+                        <td>DETAIL</td>
+                    </tr>
+                    <c:forEach var="cmt" items="${comments}">
+                    <tr>
+                        <td>${cmt.id}</td>
+                        <td>${cmt.idPost}</td>
+                        <td>${cmt.username}</td>
+                        <td>${cmt.detail}</td>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </td>
+            <td>
+                <form action="/Servlet" method="post">
+                    <input type="hidden" name="action" value="createComment">
+                    <input type="hidden" name="idPost" value="${post.id}">
+                    <input type="text" name="detail">
+                    <button type="submit"><=</button>
+                </form>
+            </td>
+
 
                 <td><a href="Servlet?action=thue&id=${post.id}">Thue</a></td>x
 

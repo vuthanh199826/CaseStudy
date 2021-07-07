@@ -1,30 +1,14 @@
 package service;
 
 import model.Post;
+import service.connection.ConnectJDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAO implements IPostDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/case03?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "123456";
-
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return connection;
-    }
+    private Connection connection = ConnectJDBC.getConnection();
 
     public PostDAO() {
     }
@@ -35,7 +19,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public List<Post> getAllPost() throws SQLException {
         List<Post> posts = new ArrayList<>();
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from post where status = 1");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -54,7 +38,7 @@ public class PostDAO implements IPostDAO {
 
     @Override
     public void insert(Post post) throws SQLException {
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("insert into post values (?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, post.getId());
         preparedStatement.setString(2, post.getUserName());
@@ -71,7 +55,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public List<Post> getMyPost(String username) throws SQLException {
         List<Post> posts = new ArrayList<>();
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from post where username = ?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,7 +75,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public Post selectPost(int id) throws SQLException {
         Post post = null;
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select* from post where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -111,7 +95,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean update(Post post) throws SQLException {
         boolean rowUpdate;
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("update  post set title = ?, price = ?, address = ?, img = ? , post.describe = ?, post.status = ? where id = ?");
         preparedStatement.setString(1, post.getTitle());
         preparedStatement.setInt(2, post.getPrice());
@@ -127,7 +111,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean delete(int id) throws SQLException {
         boolean rowDeleted;
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("delete from post where id = ?");
         preparedStatement.setInt(1,id);
         rowDeleted = preparedStatement.executeUpdate() > 0;
@@ -137,7 +121,7 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean apply(int id) throws SQLException {
         boolean rowUpdate;
-        Connection connection = getConnection();
+//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("update  post set post.status = ? where id = ?");
         preparedStatement.setBoolean(1, false);
         preparedStatement.setInt(2,id);
