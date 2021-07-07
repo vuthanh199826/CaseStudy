@@ -38,13 +38,13 @@ public class Servlet extends HttpServlet {
             case "create":
                 showFormCreate(request, response);
                 break;
-            case "login":
-                try {
-                    login(request, response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
+//            case "login":
+//                try {
+//                    login(request, response);
+//                } catch (SQLException throwables) {
+//                    throwables.printStackTrace();
+//                }
+//                break;
             case "logout":
                 showFormLogin(request, response);
                 break;
@@ -136,20 +136,20 @@ public class Servlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        boolean status = userDAO.login(username, password);
-        System.out.println(user);
-        if (status) {
-            user = request.getParameter("username");
-            System.out.println(user);
-            listPost(request, response);
-        } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
-            requestDispatcher.forward(request, response);
-        }
-    }
+//    void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        boolean status = userDAO.login(username, password);
+//        System.out.println(user);
+//        if (status) {
+//            user = request.getParameter("username");
+//            System.out.println(user);
+//            listPost(request, response);
+//        } else {
+//            RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");
+//            requestDispatcher.forward(request, response);
+//        }
+//    }
 
     void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
@@ -237,9 +237,7 @@ public class Servlet extends HttpServlet {
 
     void applyOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int idPost = Integer.parseInt( request.getParameter("idPost"));
-
         int id = Integer.parseInt(request.getParameter("id"));
-
         postDAO.apply(idPost);
         orderDAO.applyOrder(id);
         showFormOrder(request,response);
