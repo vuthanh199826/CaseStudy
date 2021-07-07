@@ -6,13 +6,15 @@ public class Order {
     private int ngaybatdau;
     private int ngayketthuc;
     private String username;
+    private String status;
 
-    public Order(int id, int idPost, int ngaybatdau, int ngayketthuc, String username) {
+    public Order(int id, int idPost, int ngaybatdau, int ngayketthuc, String username, String status) {
         this.id = id;
         this.idPost = idPost;
         this.ngaybatdau = ngaybatdau;
         this.ngayketthuc = ngayketthuc;
         this.username = username;
+        this.status  = status;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class Order {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

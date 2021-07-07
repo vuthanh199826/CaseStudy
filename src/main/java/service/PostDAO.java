@@ -36,7 +36,7 @@ public class PostDAO implements IPostDAO {
     public List<Post> getAllPost() throws SQLException {
         List<Post> posts = new ArrayList<>();
         Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from post");
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from post where status = 1");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
@@ -112,16 +112,37 @@ public class PostDAO implements IPostDAO {
     public boolean update(Post post) throws SQLException {
         boolean rowUpdate;
         Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("update  post set title = ?, price = ?, address = ?, img = ? , post.describe = ?, post.status = ?");
+        PreparedStatement preparedStatement = connection.prepareStatement("update  post set title = ?, price = ?, address = ?, img = ? , post.describe = ?, post.status = ? where id = ?");
         preparedStatement.setString(1, post.getTitle());
         preparedStatement.setInt(2, post.getPrice());
         preparedStatement.setString(3, post.getAddress());
         preparedStatement.setString(4, post.getImg());
         preparedStatement.setString(5, post.getDescribe());
         preparedStatement.setBoolean(6, post.isStatus());
+        preparedStatement.setInt(7,post.getId());
         rowUpdate = preparedStatement.executeUpdate() > 0;
         return rowUpdate;
     }
 
+    @Override
+    public boolean delete(int id) throws SQLException {
+        boolean rowDeleted;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from post where id = ?");
+        preparedStatement.setInt(1,id);
+        rowDeleted = preparedStatement.executeUpdate() > 0;
+        return rowDeleted;
+    }
+
+    @Override
+    public boolean apply(int id) throws SQLException {
+        boolean rowUpdate;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("update  post set post.status = ? where id = ?");
+        preparedStatement.setBoolean(1, false);
+        preparedStatement.setInt(2,id);
+        rowUpdate = preparedStatement.executeUpdate() > 0;
+        return rowUpdate;
+    }
 
 }

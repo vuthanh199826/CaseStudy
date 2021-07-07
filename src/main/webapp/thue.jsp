@@ -16,6 +16,7 @@
         ID<input type="text" name="idOrder"><br/>
         Ngay thue <input type="text" name="ngaybatdau"><br/>
         Ngay tra <input type="text" name="ngayketthuc"><br/>
+        <input type="hidden" name="status" value="chờ xác nhận">
         <button type="submit">submit</button>
     </form>
 </div>

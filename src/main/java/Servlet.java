@@ -70,6 +70,20 @@ public class Servlet extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "delete":
+                try {
+                    deletePost(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "apply":
+                try {
+                    applyOrder(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             default:
                 try {
                     listPost(request, response);
@@ -143,6 +157,8 @@ public class Servlet extends HttpServlet {
     void showFormMyPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Post> posts = postDAO.getMyPost(user);
         System.out.println(user);
+        System.out.println(posts);
+        System.out.println(user);
         System.out.println(posts.size());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mypost.jsp");
         request.setAttribute("mypost", posts);
@@ -193,8 +209,9 @@ public class Servlet extends HttpServlet {
         int idPost = Integer.parseInt(request.getParameter("id"));
         int ngaybatdau = Integer.parseInt(request.getParameter("ngaybatdau"));
         int ngayketthuc = Integer.parseInt(request.getParameter("ngayketthuc"));
+        String status = request.getParameter("status");
         String username = user;
-        orderDAO.insert(idOrder,idPost,ngaybatdau,ngayketthuc,username);
+        orderDAO.insert(idOrder,idPost,ngaybatdau,ngayketthuc,username,status);
         listPost(request,response);
     }
     void update(HttpServletRequest request, HttpServletResponse response) throws SQLException {
@@ -209,5 +226,23 @@ public class Servlet extends HttpServlet {
         System.out.println(post);
         postDAO.update(post);
     }
+
+    void deletePost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        postDAO.delete(id);
+        showFormMyPost(request,response);
+    }
+
+    void applyOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int idPost = Integer.parseInt( request.getParameter("idPost"));
+
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        postDAO.apply(idPost);
+        orderDAO.applyOrder(id);
+        showFormOrder(request,response);
+    }
+
+
 
 }

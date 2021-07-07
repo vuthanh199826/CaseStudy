@@ -38,6 +38,9 @@
             <td><a href="Servlet?action=update&id=${post.id}">edit</a></td>
 
 
+            <td><a href="Servlet?action=delete&id=${post.id}">delete</a></td>
+
+
         </tr>
     </c:forEach>
 </table>

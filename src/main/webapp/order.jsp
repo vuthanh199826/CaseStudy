@@ -29,6 +29,8 @@
         <td>${order.ngaybatdau}</td>
         <td>${order.ngayketthuc}</td>
         <td>${order.username}</td>
+        <td>${order.status}</td>
+        <td><a href="/Servlet?action=apply&idPost=${order.idPost}&id=${order.id}">Apply</a></td>
     </tr>
 </c:forEach>
     </table>

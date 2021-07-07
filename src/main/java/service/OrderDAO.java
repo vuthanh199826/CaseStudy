@@ -28,14 +28,15 @@ public class OrderDAO implements IOrderDAO{
 
     public OrderDAO(){};
 
-    public void insert(int id, int idPost, int ngaybatdau, int ngayketthuc, String username) throws SQLException {
+    public void insert(int id, int idPost, int ngaybatdau, int ngayketthuc, String username, String status) throws SQLException {
         Connection connection = getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into case03.order values (?,?,?,?,?)");
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into case03.order values (?,?,?,?,?,?)");
         preparedStatement.setInt(1,id);
         preparedStatement.setInt(2,idPost);
         preparedStatement.setInt(3,ngaybatdau);
         preparedStatement.setInt(4,ngayketthuc);
         preparedStatement.setString(5,username);
+        preparedStatement.setString(6, status);
         preparedStatement.executeUpdate();
     }
 
@@ -52,8 +53,18 @@ public class OrderDAO implements IOrderDAO{
             int ngaybatdau = resultSet.getInt("ngaybatdau");
             int ngayketthuc = resultSet.getInt("ngayketthuc");
             String username = resultSet.getString("username");
-            orders.add(new Order(id,idPost,ngaybatdau,ngayketthuc,username));
+            String status = resultSet.getString("status");
+            orders.add(new Order(id,idPost,ngaybatdau,ngayketthuc,username,status));
         }
         return orders;
+    }
+
+    @Override
+    public void applyOrder(int id) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("update case03.order set case03.order.status = ? where case03.order.id = ?");
+        preparedStatement.setString(1,"accepted");
+        preparedStatement.setInt(2, id);
+        preparedStatement.executeUpdate();
     }
 }

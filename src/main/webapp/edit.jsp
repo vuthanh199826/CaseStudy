@@ -66,7 +66,7 @@
             <tr>
                 <th>Status:</th>
                 <td>
-                    <input type="text" name="describe" size="15"
+                    <input type="text" name="status" size="15"
                            value="<c:out value='${post.status}' />"
                     />
                 </td>
