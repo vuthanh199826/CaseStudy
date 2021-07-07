@@ -153,7 +153,7 @@ public class Posts extends HttpServlet {
         listPost(request, response);
     }
 
-    void update(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int price = Integer.parseInt(request.getParameter("price"));
@@ -162,7 +162,7 @@ public class Posts extends HttpServlet {
         String describe = request.getParameter("describe");
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
         Post post = new Post(id, user, title, price, address, img, describe, status);
-        System.out.println(post);
         postDAO.update(post);
+        showFormMyPost(request,response);
     }
 }

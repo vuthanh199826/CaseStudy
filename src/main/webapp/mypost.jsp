@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/Servlet">ALL list post</a>
+<a href="/Posts">ALL list post</a>
 <table border="1">
     <tr>
         <th>ID</th>

@@ -13,7 +13,7 @@
 </head>
 <body>
 <div align="center">
-    <a href="/Servlet">ALL list post</a>
+    <a href="/Posts">ALL list post</a>
     <table border="1">
         <tr>
             <th>ID</th>
@@ -30,7 +30,7 @@
         <td>${order.ngayketthuc}</td>
         <td>${order.username}</td>
         <td>${order.status}</td>
-        <td><a href="/Servlet?action=apply&idPost=${order.idPost}&id=${order.id}">Apply</a></td>
+        <td><a href="/Orders?action=apply&idPost=${order.idPost}&id=${order.id}">Apply</a></td>
     </tr>
 </c:forEach>
     </table>
