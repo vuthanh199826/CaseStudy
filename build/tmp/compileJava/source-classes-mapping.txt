@@ -14,7 +14,7 @@ service/IOrderDAO.java
  service.IOrderDAO
 service/IPostDAO.java
  service.IPostDAO
-Servlet.java
- Servlet
 service/OrderDAO.java
  service.OrderDAO
+controller/Servlet.java
+ controller.Servlet

@@ -179,7 +179,7 @@
   <body style="background: url(https://picsum.photos/id/1004/5616/3744) no-repeat   center center #505050">
   $END$
 <%--  <div align="center">--%>
-<%--  <form action="/Servlet" method="get">--%>
+<%--  <form action="/controller.Servlet" method="get">--%>
 <%--    <input type="hidden" name="action" value="login">--%>
 <%--  USERNAME <input type="text" name="username"><br/>--%>
 <%--  PASSWORD <input type="text" name="password">--%>
