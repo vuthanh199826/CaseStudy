@@ -150,4 +150,34 @@ public class PostDAO implements IPostDAO {
         return posts;
     }
 
+    @Override
+    public List<Post> searchMyPostByAddress(String address, String user) throws SQLException {
+        List<Post> posts = new ArrayList<>();
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from post where address like ? and username like ?");
+        preparedStatement.setString(1,"%"+address+"%");
+        preparedStatement.setString(2, user);
+        ResultSet resultSet =  preparedStatement.executeQuery();
+        while (resultSet.next()){
+            int id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String title = resultSet.getString("title");
+            int price = resultSet.getInt("price");
+            String addressx = resultSet.getString("address");
+            String img = resultSet.getString("img");
+            String describe = resultSet.getString("describe");
+            boolean status = resultSet.getBoolean("status");
+            posts.add(new Post(id, username, title, price, addressx, img, describe, status));
+        }
+        return posts;
+    }
+
+    @Override
+    public List<Post> searchPlus(String address, int first, int second) {
+        List<Post> posts = new ArrayList<>();
+        if(address.equals("") && first !=  && second != null  ){
+
+        }
+        return posts;
+    }
+
 }

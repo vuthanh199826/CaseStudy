@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "controller.Posts", urlPatterns = "/Posts")
@@ -135,6 +136,9 @@ public class Posts extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "search":
+
+                break;
             default:
                 try {
                     listPost(request,response);
@@ -144,7 +148,6 @@ public class Posts extends HttpServlet {
 
         }
     }
-
 
     void addNewPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 //        int id = Integer.parseInt(request.getParameter("id"));
@@ -173,11 +176,16 @@ public class Posts extends HttpServlet {
         showFormMyPost(request,response);
     }
     void search (HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int first = Integer.parseInt( request.getParameter("first"));
-        int second = Integer.parseInt( request.getParameter("second"));
-        System.out.println(first);
-        System.out.println(second);
-        List<Post> posts = postDAO.searchMyPostByPrice(first,second);
+        String type = request.getParameter("type");
+        List<Post> posts = new ArrayList<>();
+        if(type.equals("price")){
+            int first = Integer.parseInt( request.getParameter("first"));
+            int second = Integer.parseInt( request.getParameter("second"));
+            posts = postDAO.searchMyPostByPrice(first,second);
+        }else if(type.equals("address")){
+            String address = request.getParameter("address");
+            posts = postDAO.searchMyPostByAddress(address,user);
+        }
         System.out.println(posts.size());
         request.setAttribute("mypost",posts);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("mypost.jsp");

@@ -14,4 +14,6 @@ public interface IPostDAO {
     boolean delete(int id) throws SQLException;
     boolean apply(int id) throws SQLException;
     List<Post>searchMyPostByPrice(int first, int second) throws SQLException;
+    List<Post>searchMyPostByAddress(String address,String user) throws SQLException;
+    List<Post>searchPlus(String address, int first, int second);
 }

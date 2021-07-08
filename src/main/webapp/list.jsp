@@ -24,6 +24,13 @@
     <a href="/Orders?action=order">My order</a>
     <a href="/Posts?action=mypost">My posts</a>
     <a href="/Posts?action=create">Create post</a>
+    <form method="post">
+        <input type="hidden" name="action" value="search">
+        <input type="text" name="address" placeholder="address">
+        <input type="text" name="first" placeholder="first price">
+        <input type="text" name="second" placeholder="second price">
+        <button type="submit">SEARCH</button>
+    </form>
     <table border="1">
         <tr>
             <th>ID</th>
