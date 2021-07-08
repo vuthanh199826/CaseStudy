@@ -34,6 +34,10 @@ public class Posts extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "test":
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("main.jsp");
+                requestDispatcher.forward(request,response);
+                break;
             case "create":
                 showFormCreate(request, response);
                 break;
@@ -173,14 +177,6 @@ public class Posts extends HttpServlet {
         }else {
 //            title null
         }
-
-
-
-
-
-
-
-
     }
 
     boolean checkNull(String str){
