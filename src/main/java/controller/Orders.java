@@ -97,13 +97,14 @@ public class Orders extends HttpServlet {
     }
 
     void thue(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int idOrder = Integer.parseInt(request.getParameter("idOrder"));
+//        int idOrder = Integer.parseInt(request.getParameter("idOrder"));
         int idPost = Integer.parseInt(request.getParameter("id"));
         int ngaybatdau = Integer.parseInt(request.getParameter("ngaybatdau"));
         int ngayketthuc = Integer.parseInt(request.getParameter("ngayketthuc"));
         String status = request.getParameter("status");
         String username = user;
-        orderDAO.insert(idOrder, idPost, ngaybatdau, ngayketthuc, username, status);
+        Order order = new Order(idPost, ngaybatdau, ngayketthuc, username, status);
+        orderDAO.insert(order);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Posts");
         requestDispatcher.forward(request,response);
     }

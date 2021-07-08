@@ -45,6 +45,15 @@ public class Comments extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "delete":
+                try {
+                    delete(request,response);
+                    showComment(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+
         }
     }
 
@@ -54,6 +63,7 @@ public class Comments extends HttpServlet {
         List<Post> posts = postDAO.getAllPost();
         request.setAttribute("comments",comments);
         request.setAttribute("posts", posts);
+        request.setAttribute("user",user);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
 //        listPost(request,response);
         requestDispatcher.forward(request,response);
@@ -87,5 +97,10 @@ public class Comments extends HttpServlet {
             commentDAO.insert(comment);
         }
         showComment(request,response);
+    }
+
+    void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt( request.getParameter("id"));
+        commentDAO.delete(id);
     }
 }

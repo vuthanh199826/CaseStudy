@@ -21,6 +21,16 @@ public class Post {
         this.status = status;
     }
 
+    public Post(String userName, String title, int price, String address, String img, String describe, boolean status) {
+        this.userName = userName;
+        this.title = title;
+        this.price = price;
+        this.address = address;
+        this.img = img;
+        this.describe = describe;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

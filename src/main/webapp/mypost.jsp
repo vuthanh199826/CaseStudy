@@ -149,8 +149,28 @@
 <div class="container">
     <div class="row">
         <div class="col-12 pt-3">
-            <a href="Posts" class="btn btn-outline-primary"><img width="30px" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/blue_repicthousebase_1484336386-1.png">HOME</a>
+            <div   class="row">
+                <div class="col-1">
+                    <a style="width: 80px" href="Posts" class="btn btn-outline-primary"><img width="30px" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/blue_repicthousebase_1484336386-1.png">HOME</a>
+                </div>
+                <div class="col-9">
+                    <form method="get">
+                        <button class="btn btn-outline-primary" style="width: 80px;height: 50px ;" type="submit">Search</button>
+                        <input style="height: 50px" type="hidden" name="action" value="search">
+                        <select class="btn btn-outline-primary" style="height: 50px;border-radius: 4px;width: 150px" name="type">
+                            <option value="price">Price</option>
+                            <option value="address">Address</option>
+                        </select>
+                        <input class="subtitle" style="height: 50px;border-radius: 4px;width: 150px" type="text" name="first" placeholder="first price">
+                        <input class="subtitle" style="height: 50px;border-radius: 4px;width: 150px" type="text" name="second" placeholder="second price">
+                        <input class="subtitle" style="height: 50px;border-radius: 4px;width: 150px" type="text" name="address" placeholder="address">
+                    </form>
+                </div>
+            </div>
+
+
         </div>
+
     </div>
     <div class="row">
         <c:forEach var="post" items="${mypost}">

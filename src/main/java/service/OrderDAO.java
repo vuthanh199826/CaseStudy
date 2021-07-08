@@ -31,15 +31,15 @@ private Connection connection = ConnectJDBC.getConnection();
 
     public OrderDAO(){};
 
-    public void insert(int id, int idPost, int ngaybatdau, int ngayketthuc, String username, String status) throws SQLException {
+    public void insert(Order order) throws SQLException {
 //        Connection connection =  getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("insert into case03.order values (?,?,?,?,?,?)");
-        preparedStatement.setInt(1,id);
-        preparedStatement.setInt(2,idPost);
-        preparedStatement.setInt(3,ngaybatdau);
-        preparedStatement.setInt(4,ngayketthuc);
-        preparedStatement.setString(5,username);
-        preparedStatement.setString(6, status);
+        preparedStatement.setInt(1,order.getId());
+        preparedStatement.setInt(2,order.getIdPost());
+        preparedStatement.setInt(3,order.getNgaybatdau());
+        preparedStatement.setInt(4,order.getNgayketthuc());
+        preparedStatement.setString(5,order.getUsername());
+        preparedStatement.setString(6, order.getStatus());
         preparedStatement.executeUpdate();
     }
 

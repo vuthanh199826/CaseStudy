@@ -17,6 +17,14 @@ public class Order {
         this.status  = status;
     }
 
+    public Order(int idPost, int ngaybatdau, int ngayketthuc, String username, String status) {
+        this.idPost = idPost;
+        this.ngaybatdau = ngaybatdau;
+        this.ngayketthuc = ngayketthuc;
+        this.username = username;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

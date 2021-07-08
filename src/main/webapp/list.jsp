@@ -62,6 +62,13 @@
                                 <td>${cmt.idPost}</td>
                                 <td>${cmt.username}</td>
                                 <td>${cmt.detail}</td>
+
+                                <c:if test="${cmt.username == user}">
+                                    <td>
+                                        <a href="/Comments?action=delete&id=${cmt.id}&idPost=${post.id}">delete</a>
+                                    </td>
+<%--                               <td>jijiji</td>--%>
+                                </c:if>
                             </tr>
                             </c:if>
                         </c:forEach>

@@ -62,6 +62,13 @@ public class Posts extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
+            case "search":
+                try {
+                    search(request,response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
             default:
                 try {
                     listPost(request,response);
@@ -140,14 +147,14 @@ public class Posts extends HttpServlet {
 
 
     void addNewPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+//        int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int price = Integer.parseInt(request.getParameter("price"));
         String address = request.getParameter("address");
         String img = request.getParameter("img");
         String describe = request.getParameter("describe");
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        Post post = new Post(id, user, title, price, address, img, describe, status);
+        Post post = new Post( user, title, price, address, img, describe, status);
         System.out.println(post);
         postDAO.insert(post);
         listPost(request, response);
@@ -164,5 +171,16 @@ public class Posts extends HttpServlet {
         Post post = new Post(id, user, title, price, address, img, describe, status);
         postDAO.update(post);
         showFormMyPost(request,response);
+    }
+    void search (HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int first = Integer.parseInt( request.getParameter("first"));
+        int second = Integer.parseInt( request.getParameter("second"));
+        System.out.println(first);
+        System.out.println(second);
+        List<Post> posts = postDAO.searchMyPostByPrice(first,second);
+        System.out.println(posts.size());
+        request.setAttribute("mypost",posts);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("mypost.jsp");
+        requestDispatcher.forward(request,response);
     }
 }

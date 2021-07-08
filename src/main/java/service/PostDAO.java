@@ -129,4 +129,25 @@ public class PostDAO implements IPostDAO {
         return rowUpdate;
     }
 
+    @Override
+    public List<Post> searchMyPostByPrice(int first, int second) throws SQLException {
+        List<Post> posts = new ArrayList<>();
+       PreparedStatement preparedStatement = connection.prepareStatement("select * from post where price >= ? and  price <= ?");
+       preparedStatement.setInt(1,first);
+       preparedStatement.setInt(2,second);
+       ResultSet resultSet =  preparedStatement.executeQuery();
+       while (resultSet.next()){
+           int id = resultSet.getInt("id");
+           String username = resultSet.getString("username");
+           String title = resultSet.getString("title");
+           int price = resultSet.getInt("price");
+           String address = resultSet.getString("address");
+           String img = resultSet.getString("img");
+           String describe = resultSet.getString("describe");
+           boolean status = resultSet.getBoolean("status");
+           posts.add(new Post(id, username, title, price, address, img, describe, status));
+       }
+        return posts;
+    }
+
 }

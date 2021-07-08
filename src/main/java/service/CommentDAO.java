@@ -39,4 +39,11 @@ public class CommentDAO implements ICommentDAO{
         }
         return comments;
     }
+
+    @Override
+    public void delete(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from comment where id = ?");
+        preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
+    }
 }

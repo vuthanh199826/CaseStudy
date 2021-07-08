@@ -1,34 +1,34 @@
-service/ICommentDAO.java
- service.ICommentDAO
+service/IOrderDAO.java
+ service.IOrderDAO
 service/UserDAO.java
  service.UserDAO
-service/PostDAO.java
- service.PostDAO
+service/ICommentDAO.java
+ service.ICommentDAO
 service/connection/ConnectJDBC.java
  service.connection.ConnectJDBC
-service/IPostDAO.java
- service.IPostDAO
-controller/Posts.java
- controller.Posts
+model/Post.java
+ model.Post
+service/OrderDAO.java
+ service.OrderDAO
 service/CommentDAO.java
  service.CommentDAO
 model/User.java
  model.User
-service/OrderDAO.java
- service.OrderDAO
+model/Order.java
+ model.Order
 model/Comment.java
  model.Comment
 service/IUserDAO.java
  service.IUserDAO
-model/Post.java
- model.Post
-model/Order.java
- model.Order
-service/IOrderDAO.java
- service.IOrderDAO
+service/IPostDAO.java
+ service.IPostDAO
 controller/Orders.java
  controller.Orders
-controller/Servlet.java
- controller.Servlet
 controller/Comments.java
  controller.Comments
+controller/Servlet.java
+ controller.Servlet
+service/PostDAO.java
+ service.PostDAO
+controller/Posts.java
+ controller.Posts
