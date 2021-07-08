@@ -2,6 +2,7 @@ package controller;
 
 import model.Post;
 
+import model.Validate;
 import service.PostDAO;
 
 
@@ -20,6 +21,7 @@ public class Posts extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO;
+    Validate validate = new Validate();
 
     public void init() {
         postDAO = new PostDAO();
@@ -142,16 +144,47 @@ public class Posts extends HttpServlet {
 
     void addNewPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         String title = request.getParameter("title");
-        int price = Integer.parseInt(request.getParameter("price"));
-        String address = request.getParameter("address");
-        String img = request.getParameter("img");
-        String describe = request.getParameter("describe");
-        boolean status = Boolean.parseBoolean(request.getParameter("status"));
-        Post post = new Post(user, title, price, address, img, describe, status);
-        System.out.println(post);
-        postDAO.insert(post);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
-        requestDispatcher.forward(request,response);
+        if(!checkNull(title)){
+            if (!checkNull(request.getParameter("price")) && validate.validate(request.getParameter("price"),Validate.NUMBER_REGEX)){
+                int price = Integer.parseInt(request.getParameter("price"));
+                String address = request.getParameter("address");
+                if (!checkNull(address)){
+                    String img = request.getParameter("img");
+                    if(!checkNull(img)){
+                        String describe = request.getParameter("describe");
+                        if (!checkNull(describe)){
+                            boolean status = Boolean.parseBoolean(request.getParameter("status"));
+                            Post post = new Post(user, title, price, address, img, describe, status);
+                            postDAO.insert(post);
+                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
+                            requestDispatcher.forward(request,response);
+                        }else {
+//                            describe
+                        }
+                    }else {
+//                        img
+                    }
+                }else {
+//                    address
+                }
+            }else {
+//                price
+            }
+        }else {
+//            title null
+        }
+
+
+
+
+
+
+
+
+    }
+
+    boolean checkNull(String str){
+        return str.equals("");
     }
 
     void deletePost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {

@@ -1,6 +1,7 @@
 package service;
 
 import model.Post;
+import model.Validate;
 import service.connection.ConnectJDBC;
 
 import java.sql.*;
@@ -15,7 +16,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public List<Post> getAllPost() throws SQLException {
         List<Post> posts = new ArrayList<>();
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from post where status = 1");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
@@ -34,7 +34,6 @@ public class PostDAO implements IPostDAO {
 
     @Override
     public void insert(Post post) throws SQLException {
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("insert into post values (?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, post.getId());
         preparedStatement.setString(2, post.getUserName());
@@ -51,7 +50,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public List<Post> getMyPost(String username) throws SQLException {
         List<Post> posts = new ArrayList<>();
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from post where username = ?");
         preparedStatement.setString(1, username);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,7 +69,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public Post selectPost(int id) throws SQLException {
         Post post = null;
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select* from post where id = ?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,7 +88,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean update(Post post) throws SQLException {
         boolean rowUpdate;
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("update  post set title = ?, price = ?, address = ?, img = ? , post.describe = ?, post.status = ? where id = ?");
         preparedStatement.setString(1, post.getTitle());
         preparedStatement.setInt(2, post.getPrice());
@@ -107,7 +103,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean delete(int id) throws SQLException {
         boolean rowDeleted;
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("delete from post where id = ?");
         preparedStatement.setInt(1, id);
         rowDeleted = preparedStatement.executeUpdate() > 0;
@@ -117,7 +112,6 @@ public class PostDAO implements IPostDAO {
     @Override
     public boolean apply(int id) throws SQLException {
         boolean rowUpdate;
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("update  post set post.status = ? where id = ?");
         preparedStatement.setBoolean(1, false);
         preparedStatement.setInt(2, id);

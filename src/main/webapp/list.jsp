@@ -74,7 +74,6 @@
                                     <td>
                                         <a href="/Comments?action=delete&id=${cmt.id}&idPost=${post.id}">delete</a>
                                     </td>
-<%--                               <td>jijiji</td>--%>
                                 </c:if>
                             </tr>
                             </c:if>

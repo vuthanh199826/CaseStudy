@@ -28,6 +28,8 @@ controller/Orders.java
  controller.Orders
 controller/Comments.java
  controller.Comments
+model/Validate.java
+ model.Validate
 controller/Servlet.java
  controller.Servlet
 controller/Posts.java
