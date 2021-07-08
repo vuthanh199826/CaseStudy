@@ -4,6 +4,7 @@ import model.User;
 import service.IUserDAO;
 import service.UserDAO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +32,14 @@ public class CheckLogin extends HttpServlet{
         HttpSession session  = req.getSession();
         session.setAttribute("userLogin",user);
         if (user == null) {
-            resp.sendRedirect("/index.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
+            req.setAttribute("message","Ten Tai Khoan Hoac Mat Khau Khong Đung");
+            requestDispatcher.forward(req,resp);
+//            resp.sendRedirect("/index.jsp");
         } else if (user.getRole() == null) {
-            resp.sendRedirect("/list");
+            resp.sendRedirect("");
         } else if (user.getRole().equalsIgnoreCase(admin)) {
-            resp.sendRedirect("/testAdmin.jsp");
+            resp.sendRedirect("/user");
         }
     }
 }

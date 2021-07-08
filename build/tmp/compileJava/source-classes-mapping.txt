@@ -1,11 +1,11 @@
-controller/UserController.java
- controller.UserController
+service/IOrderDAO.java
+ service.IOrderDAO
 service/connection/ConnectionJDBC.java
  service.connection.ConnectionJDBC
 service/ICommentDAO.java
  service.ICommentDAO
-service/UserDAO.java
- service.UserDAO
+service/PostDAO.java
+ service.PostDAO
 service/OrderDAO.java
  service.OrderDAO
 controller/Comments.java
@@ -30,9 +30,9 @@ model/Post.java
  model.Post
 model/Order.java
  model.Order
-service/IOrderDAO.java
- service.IOrderDAO
-service/PostDAO.java
- service.PostDAO
+controller/UserController.java
+ controller.UserController
+service/UserDAO.java
+ service.UserDAO
 controller/CheckLogin.java
  controller.CheckLogin

@@ -121,6 +121,11 @@ public class UserDAO implements IUserDAO {
         String sql = "insert into user(userName,password,name,address,phone) values (?,?,?,?,?)";
         PreparedStatement preparedStatement = null;
         try {
+            preparedStatement = connection.prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getName());

@@ -42,8 +42,8 @@ public class UserController extends HttpServlet {
         }
     }
     private void showFormUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("");
-        String userName = request.getParameter("userName");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/fromAdmin/update.jsp");
+        String userName = request.getParameter("username");
         User user = userDAO.findByName(userName);
         request.setAttribute("updateUser", user);
         dispatcher.forward(request, response);
@@ -52,16 +52,16 @@ public class UserController extends HttpServlet {
 
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/fromAdmin/create.jsp");
         List<User> list = userDAO.findAll();
         req.setAttribute("list", list);
         dispatcher.forward(req, resp);
     }
 
     private void showAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/fromAdmin/listAdmin.jsp");
         List<User> list = userDAO.findAll();
-        req.setAttribute("listBook", list);
+        req.setAttribute("listUser", list);
         dispatcher.forward(req, resp);
     }
 
@@ -88,7 +88,7 @@ public class UserController extends HttpServlet {
     }
 
     private void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userName");
+        String userName = req.getParameter("username");
         String password = req.getParameter("password");
         String name = req.getParameter("name");
         String address = req.getParameter("address");
@@ -106,19 +106,20 @@ public class UserController extends HttpServlet {
     }
 
     private void create(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userName");
-        String password = req.getParameter("password");
-        String name = req.getParameter("name");
-        String address = req.getParameter("address");
-        int phone = Integer.parseInt(req.getParameter("phone"));
-        String role = req.getParameter("role");
-        User user = new User(userName,password,name,address,phone,role);
+        User user = new User();
+        user.setUsername(req.getParameter("username"));
+        user.setPassword(req.getParameter("password"));
+        user.setName(req.getParameter("name"));
+        user.setAddress(req.getParameter("address"));
+        user.setPhone(Integer.parseInt(req.getParameter("phone")));
+        user.setRole(req.getParameter("role"));
+//        User user = new User(userName,password,name,address,phone,role);
         userDAO.save(user);
         showAll(req, resp);
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("name");
+        String userName = req.getParameter("username");
         userDAO.delete(userName);
         req.setAttribute("message", "Xóa Thành Công");
         showAll(req, resp);

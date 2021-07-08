@@ -192,9 +192,7 @@
     <h2 class="active"> sign in </h2>
     <h2 class="nonactive"> sign up </h2>
     <form action="/check" method="post">
-      <input type="hidden" name="action" value="login">
-
-
+<%--      <input type="hidden" name="action" value="login">--%>
 
       <input type="text" class="text" name="username">
       <span>username</span>
@@ -213,7 +211,7 @@
       <button class="signin">
         Sign In
       </button>
-
+    <p style="color: red">${message}</p>
 
       <hr>
 
