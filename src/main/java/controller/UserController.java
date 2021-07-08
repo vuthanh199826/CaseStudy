@@ -52,7 +52,7 @@ public class UserController extends HttpServlet {
 
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/fromAdmin/create.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/fromAdmin/signUp.jsp");
         List<User> list = userDAO.findAll();
         req.setAttribute("list", list);
         dispatcher.forward(req, resp);

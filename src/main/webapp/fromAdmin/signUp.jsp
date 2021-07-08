@@ -73,13 +73,9 @@
             color: #3e403f;
         }
 
-        /*  A welcome message or an explanation of the login form */
         header p {
             letter-spacing: 0.05em;
         }
-
-        /* //////////////////////////////////////////// */
-        /* //////////////////////////////////////////// */
 
         .input-item {
             background: #fff;
@@ -88,7 +84,6 @@
             border-radius: 5px 0px 0px 5px;
         }
 
-        /* Show/hide password Font Icon */
         #eye {
             background: #fff;
             color: #333;
@@ -103,25 +98,19 @@
             right: 1%;
             top: -0.2%;
             z-index: 5;
-
             cursor: pointer;
         }
 
-        /* inputs form  */
         input[class="form-input"] {
             width: 240px;
             height: 50px;
-
             margin-top: 2%;
             padding: 15px;
-
             font-size: 16px;
             font-family: "Abel", sans-serif;
             color: #5e6472;
-
             outline: none;
             border: none;
-
             border-radius: 0px 5px 5px 0px;
             transition: 0.2s linear;
         }
@@ -130,64 +119,34 @@
             width: 250px;
         }
 
-        /* focus  */
         input:focus {
             transform: translateX(-2px);
             border-radius: 5px;
         }
 
-        /* //////////////////////////////////////////// */
-        /* //////////////////////////////////////////// */
-
-        /* input[type="text"] {min-width: 250px;} */
-        /* buttons  */
         button {
             display: inline-block;
             color: #252537;
-
             width: 280px;
             height: 50px;
-
             padding: 0 20px;
             background: #fff;
             border-radius: 5px;
-
             outline: none;
             border: none;
-
             cursor: pointer;
             text-align: center;
             transition: all 0.2s linear;
-
             margin: 7% auto;
             letter-spacing: 0.05em;
         }
 
-        /* Submits */
-        .submits {
-            width: 48%;
-            display: inline-block;
-            float: left;
-            margin-left: 2%;
-        }
 
-        /*       Forgot Password button FAF3DD  */
-        .frgt-pass {
-            background: transparent;
-        }
-
-        /*     Sign Up button  */
-        .sign-up {
-            background: #b8f2e6;
-        }
-
-        /* buttons hover */
         button:hover {
             transform: translatey(3px);
             box-shadow: none;
         }
 
-        /* buttons hover Animation */
         button:hover {
             animation: ani9 0.4s ease-in-out infinite alternate;
         }
@@ -232,37 +191,46 @@
 </head>
 <body>
 <div class="overlay">
-    <form method="post" action="/check">
+    <form method="post">
         <div class="con">
             <header class="head-form">
                 <h2>Log In</h2>
                 <p>login here using your username and password</p>
             </header>
             <br>
-            <div class="field-set">
+            <div class="field-set" style="text-align: center">
                 <span class="input-item">
           <i class="fa fa-user-circle"></i>
         </span>
-                <input class="form-input" id="txt-input" type="text" placeholder="UserName" name="username" required>
+                <input name="action" value="create" hidden>
+                <input class="form-input" id="txt-input" type="text" placeholder="UserName" name="username"required>
                 <br>
                 <span class="input-item">
           <i class="fa fa-key"></i>
         </span>
                 <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>
-                <span>
-        </span>
+<%--                <span>--%>
+<%--        </span>--%>
+                <input class="form-input" type="name" placeholder="Name"  name="name" required>
+<%--                <span>--%>
+<%--        </span>--%>
+                <input class="form-input" type="address" placeholder="Address"  name="address" required>
+<%--                <span>--%>
+<%--        </span>--%>
+                <input class="form-input" type="phone" placeholder="Phone"  name="phone" required>
+<%--                <span>--%>
+<%--        </span>--%>
                 <br>
-                <button type="submit" class="log-in"> Log In</button>
+                <button class="log-in"> Log In</button>
             </div>
-            <p>${message}</p>
-            <div class="other">
-                <button class="btn submits frgt-pass">Forgot Password</button>
-                <a href="/user?action=create">
-                    <button class="btn submits sign-up" type="button">Sign Up
-                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </button>
-                </a>
-            </div>
+            <%--            <div class="other">--%>
+            <%--                <button class="btn submits frgt-pass">Forgot Password</button>--%>
+            <%--                <a href="">--%>
+            <%--                    <button class="btn submits sign-up" type="button">Sign Up--%>
+            <%--                        &lt;%&ndash;                    <i class="fa fa-user-plus" aria-hidden="true"></i>&ndash;%&gt;--%>
+            <%--                    </button>--%>
+            <%--                </a>--%>
+            <%--            </div>--%>
         </div>
     </form>
 </div>
