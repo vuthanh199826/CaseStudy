@@ -2,25 +2,37 @@ controller/UserController.java
  controller.UserController
 service/connection/ConnectionJDBC.java
  service.connection.ConnectionJDBC
-controller/CheckUser.java
- controller.CheckUser
+service/ICommentDAO.java
+ service.ICommentDAO
 service/UserDAO.java
  service.UserDAO
+service/OrderDAO.java
+ service.OrderDAO
+controller/Comments.java
+ controller.Comments
+service/connection/ConnectJDBC.java
+ service.connection.ConnectJDBC
 service/IPostDAO.java
  service.IPostDAO
+service/CommentDAO.java
+ service.CommentDAO
+controller/Posts.java
+ controller.Posts
 model/User.java
  model.User
+controller/Orders.java
+ controller.Orders
+model/Comment.java
+ model.Comment
 service/IUserDAO.java
  service.IUserDAO
 model/Post.java
  model.Post
 model/Order.java
  model.Order
-controller/Servlet.java
- controller.Servlet
 service/IOrderDAO.java
  service.IOrderDAO
 service/PostDAO.java
  service.PostDAO
-service/OrderDAO.java
- service.OrderDAO
+controller/CheckLogin.java
+ controller.CheckLogin

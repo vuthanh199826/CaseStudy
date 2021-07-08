@@ -12,7 +12,9 @@
 </head>
 <body>
 <div align="center">
+    <a href="/Posts">List Post</a>
 <form method="post">
+<%--    <input type="hidden" name="action" value="create">--%>
     ID<input type="text" name="id"><br/>
     TITLE<input type="text" name="title"><br/>
     PRICE<input type="text" name="price"><br/>

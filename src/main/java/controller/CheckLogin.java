@@ -24,7 +24,7 @@ public class CheckLogin extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("name");
+        String userName = req.getParameter("username");
         String password = req.getParameter("password");
         String admin = "admin";
         User user = userDAO.findUserByUserName(userName, password);
@@ -35,7 +35,7 @@ public class CheckLogin extends HttpServlet{
         } else if (user.getRole() == null) {
             resp.sendRedirect("/list");
         } else if (user.getRole().equalsIgnoreCase(admin)) {
-            resp.sendRedirect("");
+            resp.sendRedirect("/testAdmin.jsp");
         }
     }
 }

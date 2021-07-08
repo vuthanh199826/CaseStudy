@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/Servlet">ALL list post</a>
+<a href="/Posts">ALL list post</a>
 <table border="1">
     <tr>
         <th>ID</th>
@@ -35,10 +35,10 @@
             <td>${post.describe}</td>
             <td>${post.status}</td>
 
-            <td><a href="Servlet?action=update&id=${post.id}">edit</a></td>
+            <td><a href="Posts?action=edit&id=${post.id}">edit</a></td>
 
 
-            <td><a href="Servlet?action=delete&id=${post.id}">delete</a></td>
+            <td><a href="Posts?action=delete&id=${post.id}">delete</a></td>
 
 
         </tr>

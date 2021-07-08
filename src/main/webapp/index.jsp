@@ -190,9 +190,8 @@
 
   <div class="login">
     <h2 class="active"> sign in </h2>
-
     <h2 class="nonactive"> sign up </h2>
-    <form action="/Servlet" method="get">
+    <form action="/check" method="post">
       <input type="hidden" name="action" value="login">
 
 

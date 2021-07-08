@@ -1,13 +1,16 @@
 package service;
 
 import model.User;
+
 import service.connection.ConnectionJDBC;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements IUserDAO{
+public class UserDAO implements IUserDAO {
+
     private Connection connection = ConnectionJDBC.getConnection();
 
     @Override
@@ -19,7 +22,7 @@ public class UserDAO implements IUserDAO{
         try {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 User user = new User();
                 user.setUsername(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("password"));
@@ -39,12 +42,12 @@ public class UserDAO implements IUserDAO{
     public User findByName(String name) {
         String sql = "select * from user where userName like ?";
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null ;
+        ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,"%"+  name +"%");
+            preparedStatement.setString(1, "%" + name + "%");
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 User user = new User();
                 user.setUsername(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("address"));
@@ -67,10 +70,10 @@ public class UserDAO implements IUserDAO{
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,name);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 User user = new User();
                 user.setUsername(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("address"));
@@ -94,9 +97,9 @@ public class UserDAO implements IUserDAO{
         ResultSet resultSet = null;
         try {
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,"%"+name+"%");
+            preparedStatement.setString(1, "%" + name + "%");
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 User user = new User();
                 user.setUsername(resultSet.getString("userName"));
                 user.setPassword(resultSet.getString("password"));
@@ -118,11 +121,11 @@ public class UserDAO implements IUserDAO{
         String sql = "insert into user(userName,password,name,address,phone) values (?,?,?,?,?)";
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement.setString(1,user.getUsername());
-            preparedStatement.setString(2,user.getPassword());
-            preparedStatement.setString(3,user.getName());
-            preparedStatement.setString(4,user.getAddress());
-            preparedStatement.setInt(5,user.getPhone());
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getAddress());
+            preparedStatement.setInt(5, user.getPhone());
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -140,7 +143,7 @@ public class UserDAO implements IUserDAO{
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getAddress());
             preparedStatement.setInt(4, user.getPhone());
-            preparedStatement.setString(5, "%" + name + "%" );
+            preparedStatement.setString(5, "%" + name + "%");
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -148,7 +151,7 @@ public class UserDAO implements IUserDAO{
     }
 
     @Override
-    public void delete( String name ) {
+    public void delete(String name) {
         String sql = "delete from user where userName like ?";
         PreparedStatement preparedStatement = null;
         try {
@@ -159,7 +162,8 @@ public class UserDAO implements IUserDAO{
             throwables.printStackTrace();
         }
     }
-//    public class UserDAO implements IUserDAO{
+
+    //    public class UserDAO implements IUserDAO{
 //        private String jdbcURL = "jdbc:mysql://localhost:3306/case03?useSSL=false";
 //        private String jdbcUsername = "root";
 //        private String jdbcPassword = "123456";
@@ -178,24 +182,28 @@ public class UserDAO implements IUserDAO{
 //            return connection;
 //        }
 //        public UserDAO(){};
-        @Override
-        public boolean login(String username, String password) throws SQLException {
-            User user = null;
-            PreparedStatement preparedStatement = connection.prepareStatement("Select * from user where username = ? and password = ?");
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2,password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                String name = resultSet.getString("name");
-                String address = resultSet.getString("address");
-                int phone = resultSet.getInt("phone");
-                user = new User(username,password,name,address,phone);
-            }
-            if(user==null){
-                return false;
-            }else {
-                return true;
-            }
+    @Override
+    public boolean login(String username, String password) throws SQLException {
+        User user = null;
+        PreparedStatement preparedStatement = connection.prepareStatement("Select * from user where username = ? and password = ?");
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String name = resultSet.getString("name");
+            String address = resultSet.getString("address");
+            int phone = resultSet.getInt("phone");
+            user = new User(username, password, name, address, phone);
+        }
+        if (user == null) {
+            return false;
+        } else {
+            return true;
         }
     }
+
+
+
+
+}
 

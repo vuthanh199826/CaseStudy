@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 .gradle
 .idea
+=======
+.idea
+.gradle
+>>>>>>> 4396cf7c2375bf9e9a76981819284545afc1c784
 build
-src/main/java/service/connection
+src/main/java/service/connection/ConnectionJDBC.java
