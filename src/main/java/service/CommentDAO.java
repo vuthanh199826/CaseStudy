@@ -16,7 +16,6 @@ public class CommentDAO implements ICommentDAO{
 
     @Override
     public void insert(Comment comment) throws SQLException {
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("insert into comment (idPost, username, detail) values (?,?,?)");
         preparedStatement.setInt(1,comment.getIdPost());
         preparedStatement.setString(2,comment.getUsername());
@@ -27,7 +26,6 @@ public class CommentDAO implements ICommentDAO{
     @Override
     public List<Comment> commentOfPost(int idPost) throws SQLException {
         List<Comment> comments = new ArrayList<>();
-//        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("select* from comment where idPost = ?");
         preparedStatement.setInt(1,idPost);
         ResultSet resultSet = preparedStatement.executeQuery();

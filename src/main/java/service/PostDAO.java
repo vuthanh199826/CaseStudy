@@ -8,13 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAO implements IPostDAO {
-    private Connection connection = ConnectJDBC.getConnection();
-
+    private final Connection connection = ConnectJDBC.getConnection();
     public PostDAO() {
     }
-
-    ;
-
 
     @Override
     public List<Post> getAllPost() throws SQLException {
@@ -103,7 +99,7 @@ public class PostDAO implements IPostDAO {
         preparedStatement.setString(4, post.getImg());
         preparedStatement.setString(5, post.getDescribe());
         preparedStatement.setBoolean(6, post.isStatus());
-        preparedStatement.setInt(7,post.getId());
+        preparedStatement.setInt(7, post.getId());
         rowUpdate = preparedStatement.executeUpdate() > 0;
         return rowUpdate;
     }
@@ -113,7 +109,7 @@ public class PostDAO implements IPostDAO {
         boolean rowDeleted;
 //        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("delete from post where id = ?");
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         rowDeleted = preparedStatement.executeUpdate() > 0;
         return rowDeleted;
     }
@@ -124,7 +120,7 @@ public class PostDAO implements IPostDAO {
 //        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("update  post set post.status = ? where id = ?");
         preparedStatement.setBoolean(1, false);
-        preparedStatement.setInt(2,id);
+        preparedStatement.setInt(2, id);
         rowUpdate = preparedStatement.executeUpdate() > 0;
         return rowUpdate;
     }
@@ -132,21 +128,21 @@ public class PostDAO implements IPostDAO {
     @Override
     public List<Post> searchMyPostByPrice(int first, int second) throws SQLException {
         List<Post> posts = new ArrayList<>();
-       PreparedStatement preparedStatement = connection.prepareStatement("select * from post where price >= ? and  price <= ?");
-       preparedStatement.setInt(1,first);
-       preparedStatement.setInt(2,second);
-       ResultSet resultSet =  preparedStatement.executeQuery();
-       while (resultSet.next()){
-           int id = resultSet.getInt("id");
-           String username = resultSet.getString("username");
-           String title = resultSet.getString("title");
-           int price = resultSet.getInt("price");
-           String address = resultSet.getString("address");
-           String img = resultSet.getString("img");
-           String describe = resultSet.getString("describe");
-           boolean status = resultSet.getBoolean("status");
-           posts.add(new Post(id, username, title, price, address, img, describe, status));
-       }
+        PreparedStatement preparedStatement = connection.prepareStatement("select * from post where price >= ? and  price <= ?");
+        preparedStatement.setInt(1, first);
+        preparedStatement.setInt(2, second);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String title = resultSet.getString("title");
+            int price = resultSet.getInt("price");
+            String address = resultSet.getString("address");
+            String img = resultSet.getString("img");
+            String describe = resultSet.getString("describe");
+            boolean status = resultSet.getBoolean("status");
+            posts.add(new Post(id, username, title, price, address, img, describe, status));
+        }
         return posts;
     }
 
@@ -154,10 +150,10 @@ public class PostDAO implements IPostDAO {
     public List<Post> searchMyPostByAddress(String address, String user) throws SQLException {
         List<Post> posts = new ArrayList<>();
         PreparedStatement preparedStatement = connection.prepareStatement("select * from post where address like ? and username like ?");
-        preparedStatement.setString(1,"%"+address+"%");
+        preparedStatement.setString(1, "%" + address + "%");
         preparedStatement.setString(2, user);
-        ResultSet resultSet =  preparedStatement.executeQuery();
-        while (resultSet.next()){
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String username = resultSet.getString("username");
             String title = resultSet.getString("title");
@@ -172,12 +168,37 @@ public class PostDAO implements IPostDAO {
     }
 
     @Override
-    public List<Post> searchPlus(String address, int first, int second) {
+    public List<Post> searchPlus(String address, int first, int second) throws SQLException {
         List<Post> posts = new ArrayList<>();
-        if(address.equals("") && first !=  && second != null  ){
-
+        ResultSet resultSet;
+        if (address.equals("")) {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from post where price >= ? and price <= ?");
+            preparedStatement.setInt(1, first);
+            preparedStatement.setInt(2, second);
+            resultSet = preparedStatement.executeQuery();
+        } else if (first == 0 && second == 0) {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from post where address like ?");
+            preparedStatement.setString(1, "%" + address + "%");
+            resultSet = preparedStatement.executeQuery();
+        } else {
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from post where address like ? and price >= ? and price <= ?");
+            preparedStatement.setString(1, "%" + address + "%");
+            preparedStatement.setInt(2, first);
+            preparedStatement.setInt(3, second);
+            resultSet = preparedStatement.executeQuery();
         }
-        return posts;
+        while (resultSet.next()){
+            int id = resultSet.getInt("id");
+            String username = resultSet.getString("username");
+            String title = resultSet.getString("title");
+            int price = resultSet.getInt("price");
+            String addressx = resultSet.getString("address");
+            String img = resultSet.getString("img");
+            String describe = resultSet.getString("describe");
+            boolean status = resultSet.getBoolean("status");
+            posts.add(new Post(id, username, title, price, addressx, img, describe, status));
+        }
+            return posts;
     }
 
 }
