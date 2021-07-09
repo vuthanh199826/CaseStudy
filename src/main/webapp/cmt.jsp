@@ -7,6 +7,7 @@
         body {
             background: url("https://media.giphy.com/media/W1fFapmqgqEf8RJ9TQ/giphy.gif");
             background-size: auto;
+            cursor: pointer;
         }
 
         .subtitle {
@@ -97,6 +98,9 @@
 
 <div class="container">
     <div class="row">
+        <a style="width: 80px" href="Posts" class="btn btn-outline-primary"><img width="30px" src="https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/blue_repicthousebase_1484336386-1.png">HOME</a>
+    </div>
+    <div class="row">
         <div class="col-12">
             <c:if test="${post != null}">
                 <input type="hidden" name="id" value="<c:out value='${post.id}' />"/>
@@ -129,7 +133,7 @@
                                                 <td></td>
                                                 <c:if test="${cmt.username == user}">
                                                     <td>
-                                                        <a href="/Comments?action=delete&id=${cmt.id}&idPost=${post.id}" style="text-decoration: none">x</a>
+                                                        <a href="/Comments?action=delete&id=${cmt.id}&idPost=${post.id}" style="text-decoration: none">X</a>
                                                     </td>
                                                 </c:if>
                                             </tr>
@@ -140,7 +144,7 @@
                                             <form action="/Comments" method="post" style="margin-top: 10px">
                                                 <input type="hidden" name="action" value="createComment">
                                                 <input type="hidden" name="idPost" value="${post.id}">
-                                                <input type="text" name="detail" class="form-control">
+                                                <input style="border-radius: 25px" type="text" name="detail" class="form-control">
                                             </form>
                                         </td>
                                     </tr>

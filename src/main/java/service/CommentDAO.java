@@ -1,7 +1,7 @@
 package service;
 
 import model.Comment;
-import service.connection.ConnectJDBC;
+import service.connection.ConnectionJDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommentDAO implements ICommentDAO{
 
-    private Connection connection = ConnectJDBC.getConnection();
+    private Connection connection = ConnectionJDBC.getConnection();
 
     public CommentDAO() {
     }
@@ -42,6 +42,13 @@ public class CommentDAO implements ICommentDAO{
     public void delete(int id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("delete from comment where id = ?");
         preparedStatement.setInt(1,id);
+        preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public void deleteCommentOfPost(int idPost) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("delete from comment where idPost = ?");
+        preparedStatement.setInt(1,idPost);
         preparedStatement.executeUpdate();
     }
 }

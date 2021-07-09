@@ -72,13 +72,6 @@ public class Posts extends HttpServlet {
                     throwables.printStackTrace();
                 }
                 break;
-            case "view":
-                try {
-                    showFormCmt(request,response);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                break;
             default:
                 try {
                     listPost(request, response);
@@ -145,13 +138,7 @@ public class Posts extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    void showFormCmt( HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Post post = postDAO.selectPost(id);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("cmt.jsp");
-        request.setAttribute("post", post);
-        requestDispatcher.forward(request, response);
-    }
+
 
     void showFormMyPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         List<Post> posts = postDAO.getMyPost(user);
@@ -203,6 +190,7 @@ public class Posts extends HttpServlet {
 
     void deletePost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
+        commentDAO.deleteCommentOfPost(id);
         postDAO.delete(id);
         showFormMyPost(request, response);
     }

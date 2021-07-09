@@ -1,15 +1,14 @@
 package service;
 
 import model.Post;
-import model.Validate;
-import service.connection.ConnectJDBC;
+import service.connection.ConnectionJDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAO implements IPostDAO {
-    private final Connection connection = ConnectJDBC.getConnection();
+    private final Connection connection = ConnectionJDBC.getConnection();
     public PostDAO() {
     }
 

@@ -1,12 +1,12 @@
 package service;
 
 import model.User;
-import service.connection.ConnectJDBC;
+import service.connection.ConnectionJDBC;
 
 import java.sql.*;
 
 public class UserDAO implements IUserDAO{
-    private Connection connection = ConnectJDBC.getConnection();
+    private Connection connection = ConnectionJDBC.getConnection();
 
     public UserDAO(){};
 

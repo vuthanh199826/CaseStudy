@@ -116,6 +116,7 @@
         body{
             background: url("https://media.giphy.com/media/W1fFapmqgqEf8RJ9TQ/giphy.gif");
             background-size: auto;
+            cursor: pointer;
         }
         .subtitle {
             color: #eee;
@@ -140,7 +141,8 @@
         }
 
         .input {
-            background-color: #303245;
+            /*background-color: #303245;*/
+            background-color: #E98580;
             border-radius: 12px;
             border: 0;
             box-sizing: border-box;
@@ -247,10 +249,10 @@
     </div>
     <%--    row2--%>
     <div class="row">
-        <div style="background-color: dimgrey" class="col-3" id="ul1">
-            <ul style="list-style-type: none;background-color: dimgrey;margin-top: 20px"
+        <div style="background-color: #FDD2BF" class="col-3" id="ul1">
+            <ul style="list-style-type: none;background-color: #FDD2BF;margin-top: 20px"
                 class="dropdown-menu-1 xl-6 lh-3-md-1">
-                <li><a style="width: 220px;border-radius: 4px;margin: 2px" class="btn btn-outline-info xl-6 lh-3-md-1" href="#">CHUNG CƯ MINI</a></li>
+                <li><a style="width: 220px;border-radius: 4px;margin: 2px;color: #E98580;" class="btn btn-outline-info xl-6 lh-3-md-1" href="#">CHUNG CƯ MINI</a></li>
                 <li><a style="width: 220px;border-radius: 4px;margin: 2px" class="btn btn-outline-info xl-6 lh-3-md-1" href="#">PHÒNG TRỌ GIÁ RẺ</a></li>
                 <li><a style="width: 220px;border-radius: 4px;margin: 2px" class="btn btn-outline-info xl-6 lh-3-md-1" href="#">PHÒNG TRỌ ĐẸP</a></li>
                 <li><a style="width: 220px;border-radius: 4px;margin: 2px" class="btn btn-outline-info xl-6 lh-3-md-1" href="#">GẦN BẠN NHẤT</a></li>
@@ -263,7 +265,7 @@
 
             </ul>
         </div>
-        <div style="background-color: dimgrey" class="col-9">
+        <div style="background-color: #FDD2BF" class="col-9">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
@@ -304,7 +306,7 @@
     <div class="row">
         <c:forEach var="post" items="${posts}">
             <div  class="col-4">
-                <div  style=" background-color: #15172b; height: 580px; border-radius: 3px" class="card m-3 p-2 ">
+                <div style=" background-color: #FDD2BF; height: 580px; border-radius: 3px" class="card m-3 p-2 ">
                     <img style="border-radius: 3px" width="200px" height="200px" src="${post.img}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <div  class="input-container ic1">
