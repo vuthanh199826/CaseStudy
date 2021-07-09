@@ -26,11 +26,11 @@ service/PostDAO.java
  service.PostDAO
 controller/Orders.java
  controller.Orders
-controller/Comments.java
- controller.Comments
-model/Validate.java
- model.Validate
 controller/Servlet.java
  controller.Servlet
+model/Validate.java
+ model.Validate
 controller/Posts.java
  controller.Posts
+controller/Comments.java
+ controller.Comments

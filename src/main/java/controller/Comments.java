@@ -60,14 +60,15 @@ public class Comments extends HttpServlet {
     void showComment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int idPost = Integer.parseInt(request.getParameter("idPost"));
         List<Comment> comments = commentDAO.commentOfPost(idPost);
-        List<Post> posts = postDAO.getAllPost();
+        Post post = postDAO.selectPost(idPost);
         request.setAttribute("comments",comments);
-        request.setAttribute("posts", posts);
+        request.setAttribute("post", post);
         request.setAttribute("user",user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("cmt.jsp");
 //        listPost(request,response);
         requestDispatcher.forward(request,response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

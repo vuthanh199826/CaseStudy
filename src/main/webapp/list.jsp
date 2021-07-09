@@ -315,8 +315,12 @@
                                 Describe: ${post.describe}<br/>
                                 Address: ${post.address}<br/>
                                 Price: ${post.price}<br/>
-                                Status: ${post.status}<br/><br/><br/>
+                                Status: <c:if test="${post.status == true}"> Còn phòng </c:if>
+                                <c:if test="${post.status == false}"> Hết phòng </c:if>
+                                <br/><br/><br/>
+
                                 <a class="btn btn-outline-primary" href="Orders?action=thue&id=${post.id}">RENT</a>
+                                <a class="btn btn-outline-primary" href="Comments?action=showComment&idPost=${post.id}">Cmt</a>
                             </p>
 
                             <div class="cut"></div>

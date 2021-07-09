@@ -3,6 +3,7 @@ package controller;
 import model.Post;
 
 import model.Validate;
+import service.CommentDAO;
 import service.PostDAO;
 
 
@@ -21,10 +22,12 @@ public class Posts extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO;
+    private CommentDAO commentDAO;
     Validate validate = new Validate();
 
     public void init() {
         postDAO = new PostDAO();
+        commentDAO = new CommentDAO();
     }
 
     @Override
@@ -35,7 +38,7 @@ public class Posts extends HttpServlet {
         }
         switch (action) {
             case "test":
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("main.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("cmt.jsp");
                 requestDispatcher.forward(request,response);
                 break;
             case "create":
@@ -65,6 +68,13 @@ public class Posts extends HttpServlet {
             case "search":
                 try {
                     search(request, response);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                break;
+            case "view":
+                try {
+                    showFormCmt(request,response);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -131,6 +141,14 @@ public class Posts extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Post post = postDAO.selectPost(id);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("edit.jsp");
+        request.setAttribute("post", post);
+        requestDispatcher.forward(request, response);
+    }
+
+    void showFormCmt( HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Post post = postDAO.selectPost(id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("cmt.jsp");
         request.setAttribute("post", post);
         requestDispatcher.forward(request, response);
     }
