@@ -2,6 +2,7 @@ package controller;
 
 import model.Post;
 
+import model.User;
 import model.Validate;
 import service.CommentDAO;
 import service.PostDAO;
@@ -18,8 +19,6 @@ import java.util.List;
 @WebServlet(name = "controller.Posts", urlPatterns = "/Posts")
 public class Posts extends HttpServlet {
 
-    private String user = "thanh";
-
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO;
     private CommentDAO commentDAO;
@@ -32,6 +31,9 @@ public class Posts extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -46,14 +48,14 @@ public class Posts extends HttpServlet {
                 break;
             case "mypost":
                 try {
-                    showFormMyPost(request, response);
+                    showFormMyPost(request, response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "delete":
                 try {
-                    deletePost(request, response);
+                    deletePost(request, response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -67,7 +69,7 @@ public class Posts extends HttpServlet {
                 break;
             case "search":
                 try {
-                    search(request, response);
+                    search(request, response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -82,6 +84,9 @@ public class Posts extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -89,14 +94,14 @@ public class Posts extends HttpServlet {
         switch (action) {
             case "create":
                 try {
-                    addNewPost(request, response);
+                    addNewPost(request, response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
                 break;
             case "edit":
                 try {
-                    update(request, response);
+                    update(request, response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -140,7 +145,7 @@ public class Posts extends HttpServlet {
 
 
 
-    void showFormMyPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    void showFormMyPost(HttpServletRequest request, HttpServletResponse response,String user) throws ServletException, IOException, SQLException {
         List<Post> posts = postDAO.getMyPost(user);
         System.out.println(user);
         System.out.println(posts);
@@ -151,7 +156,7 @@ public class Posts extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    void addNewPost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void addNewPost(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         String title = request.getParameter("title");
         if(!checkNull(title)){
             if (!checkNull(request.getParameter("price")) && validate.validate(request.getParameter("price"),Validate.NUMBER_REGEX)){
@@ -188,14 +193,14 @@ public class Posts extends HttpServlet {
         return str.equals("");
     }
 
-    void deletePost(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void deletePost(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         commentDAO.deleteCommentOfPost(id);
         postDAO.delete(id);
-        showFormMyPost(request, response);
+        showFormMyPost(request, response,user);
     }
 
-    void update(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void update(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         int price = Integer.parseInt(request.getParameter("price"));
@@ -205,10 +210,10 @@ public class Posts extends HttpServlet {
         boolean status = Boolean.parseBoolean(request.getParameter("status"));
         Post post = new Post(id, user, title, price, address, img, describe, status);
         postDAO.update(post);
-        showFormMyPost(request, response);
+        showFormMyPost(request, response,user);
     }
 
-    void search(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void search(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         String type = request.getParameter("type");
         List<Post> posts = new ArrayList<>();
         if (type.equals("price")) {
@@ -241,5 +246,8 @@ public class Posts extends HttpServlet {
         request.setAttribute("posts", posts);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
         requestDispatcher.forward(request, response);
+    }
+    void logout(HttpServletRequest request, HttpServletResponse response){
+
     }
 }

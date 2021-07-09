@@ -2,6 +2,7 @@ package controller;
 
 import model.Comment;
 import model.Post;
+import model.User;
 import service.CommentDAO;
 import service.OrderDAO;
 import service.PostDAO;
@@ -17,7 +18,7 @@ import java.util.List;
 public class Comments extends HttpServlet {
 
 
-    private String user = "thanh";
+
 
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO;
@@ -33,6 +34,9 @@ public class Comments extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -40,7 +44,7 @@ public class Comments extends HttpServlet {
         switch (action) {
             case "showComment":
                 try {
-                    showComment(request,response);
+                    showComment(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -48,7 +52,7 @@ public class Comments extends HttpServlet {
             case "delete":
                 try {
                     delete(request,response);
-                    showComment(request,response);
+                    showComment(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -57,7 +61,7 @@ public class Comments extends HttpServlet {
         }
     }
 
-    void showComment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void showComment(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         int idPost = Integer.parseInt(request.getParameter("idPost"));
         List<Comment> comments = commentDAO.commentOfPost(idPost);
         Post post = postDAO.selectPost(idPost);
@@ -72,6 +76,9 @@ public class Comments extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -79,7 +86,7 @@ public class Comments extends HttpServlet {
         switch (action) {
             case "createComment":
                 try {
-                    createComment(request,response);
+                    createComment(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -88,7 +95,7 @@ public class Comments extends HttpServlet {
     }
 
 
-    void createComment(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void createComment(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
         int idPost = Integer.parseInt(request.getParameter("idPost"));
         String username = user;
         String detail = request.getParameter("detail");
@@ -97,7 +104,7 @@ public class Comments extends HttpServlet {
         }else {
             commentDAO.insert(comment);
         }
-        showComment(request,response);
+        showComment(request,response,user);
     }
 
     void delete(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {

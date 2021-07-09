@@ -1,36 +1,40 @@
-model/Validate.java
- model.Validate
-service/IUserDAO.java
- service.IUserDAO
-service/IOrderDAO.java
- service.IOrderDAO
-service/ICommentDAO.java
- service.ICommentDAO
-service/IPostDAO.java
- service.IPostDAO
-model/Post.java
- model.Post
-model/Comment.java
- model.Comment
-model/User.java
- model.User
-model/Order.java
- model.Order
+controller/UserController.java
+ controller.UserController
 service/connection/ConnectionJDBC.java
  service.connection.ConnectionJDBC
-service/CommentDAO.java
- service.CommentDAO
-controller/Posts.java
- controller.Posts
-controller/Orders.java
- controller.Orders
+service/ICommentDAO.java
+ service.ICommentDAO
 service/UserDAO.java
  service.UserDAO
 controller/Comments.java
  controller.Comments
-controller/Servlet.java
- controller.Servlet
 service/PostDAO.java
  service.PostDAO
+model/Validate.java
+ model.Validate
+service/IPostDAO.java
+ service.IPostDAO
+service/CommentDAO.java
+ service.CommentDAO
 service/OrderDAO.java
  service.OrderDAO
+model/User.java
+ model.User
+controller/Posts.java
+ controller.Posts
+model/Comment.java
+ model.Comment
+service/IUserDAO.java
+ service.IUserDAO
+model/Post.java
+ model.Post
+model/Order.java
+ model.Order
+service/IOrderDAO.java
+ service.IOrderDAO
+controller/Servlet.java
+ controller.Servlet
+controller/Orders.java
+ controller.Orders
+controller/CheckLogin.java
+ controller.CheckLogin

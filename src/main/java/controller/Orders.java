@@ -1,6 +1,7 @@
 package controller;
 
 import model.Order;
+import model.User;
 import service.OrderDAO;
 import service.PostDAO;
 
@@ -15,7 +16,6 @@ import java.util.List;
 public class Orders extends HttpServlet {
 
 
-    private String user = "thanh";
 
     private static final long serialVersionUID = 1L;
     private PostDAO postDAO;
@@ -31,6 +31,9 @@ public class Orders extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -41,7 +44,7 @@ public class Orders extends HttpServlet {
                 break;
             case "order":
                 try {
-                    showFormOrder(request,response);
+                    showFormOrder(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -49,7 +52,7 @@ public class Orders extends HttpServlet {
             case "apply":
                 try {
                     applyOrder(request,response);
-                    showFormOrder(request,response);
+                    showFormOrder(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -63,7 +66,7 @@ public class Orders extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    void showFormOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    void showFormOrder(HttpServletRequest request, HttpServletResponse response,String user) throws ServletException, IOException, SQLException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("order.jsp");
         List<Order> orders = orderDAO.allOrder(user);
         request.setAttribute("orders", orders);
@@ -81,6 +84,9 @@ public class Orders extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User username = (User) session.getAttribute("userLogin");
+        String user = username.getUsername();
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -88,7 +94,7 @@ public class Orders extends HttpServlet {
         switch (action) {
             case "thue":
                 try {
-                    thue(request,response);
+                    thue(request,response,user);
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -96,7 +102,7 @@ public class Orders extends HttpServlet {
         }
     }
 
-    void thue(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    void thue(HttpServletRequest request, HttpServletResponse response,String user) throws SQLException, ServletException, IOException {
 //        int idOrder = Integer.parseInt(request.getParameter("idOrder"));
         int idPost = Integer.parseInt(request.getParameter("id"));
         int ngaybatdau = Integer.parseInt(request.getParameter("ngaybatdau"));

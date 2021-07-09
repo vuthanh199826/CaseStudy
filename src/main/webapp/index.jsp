@@ -1,226 +1,227 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-    <style>
-      body,
-      .signin {
-        font-family: 'Montserrat', sans-serif;
-        color: #fff;
-        font-size: 14px;
-        letter-spacing: 1px;
+<head>
+  <title>$Title$</title>
+  <style>
+    /* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+    @import url("https://fonts.googleapis.com/css?family=Abel%7CAbril+Fatface%7CAlegreya%7CArima+Madurai%7CDancing+Script%7CDosis%7CMerriweather%7COleo+Script%7COverlock%7CPT+Serif%7CPacifico%7CPlayball%7CPlayfair+Display%7CShare%7CUnica+One%7CVibur");
+    /* End Fonts */
+    /* Start Global rules */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    /* End Global rules */
+    /* Start body rules */
+    body {
+      background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+      background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      font-family: "Vibur", cursive;
+      /*   the main font */
+      font-family: "Abel", sans-serif;
+      opacity: 0.95;
+      /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
+    }
+    /* |||||||||||||||||||||||||||||||||||||||||||||*/
+    /* //////////////////////////////////////////// */
+    /* End body rules */
+    /* Start form  attributes */
+    form {
+      width: 450px;
+      min-height: 500px;
+      height: auto;
+      border-radius: 5px;
+      margin: 2% auto;
+      box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
+      padding: 2%;
+      background-image: linear-gradient(-225deg, #e3fdf5 50%, #ffe6fa 50%);
+    }
+    /* form Container */
+    form .con {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-around;
+      justify-content: space-around;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+    /* the header form form */
+    header {
+      margin: 2% auto 10% auto;
+      text-align: center;
+    }
+    /* Login title form form */
+    header h2 {
+      font-size: 250%;
+      font-family: "Playfair Display", serif;
+      color: #3e403f;
+    }
+    /*  A welcome message or an explanation of the login form */
+    header p {
+      letter-spacing: 0.05em;
+    }
+    /* //////////////////////////////////////////// */
+    /* //////////////////////////////////////////// */
+    .input-item {
+      background: #fff;
+      color: #333;
+      padding: 14.5px 0px 15px 9px;
+      border-radius: 5px 0px 0px 5px;
+    }
+    /* Show/hide password Font Icon */
+    #eye {
+      background: #fff;
+      color: #333;
+      margin: 5.9px 0 0 0;
+      margin-left: -20px;
+      padding: 15px 9px 19px 0px;
+      border-radius: 0px 5px 5px 0px;
+      float: right;
+      position: relative;
+      right: 1%;
+      top: -0.2%;
+      z-index: 5;
+      cursor: pointer;
+    }
+    /* inputs form  */
+    input[class="form-input"] {
+      width: 240px;
+      height: 50px;
+      margin-top: 2%;
+      padding: 15px;
+      font-size: 16px;
+      font-family: "Abel", sans-serif;
+      color: #5e6472;
+      outline: none;
+      border: none;
+      border-radius: 0px 5px 5px 0px;
+      transition: 0.2s linear;
+    }
+    input[id="txt-input"] {
+      width: 250px;
+    }
+    /* focus  */
+    input:focus {
+      transform: translateX(-2px);
+      border-radius: 5px;
+    }
+    /* //////////////////////////////////////////// */
+    /* //////////////////////////////////////////// */
+    /* input[type="text"] {min-width: 250px;} */
+    /* buttons  */
+    button {
+      display: inline-block;
+      color: #252537;
+      width: 280px;
+      height: 50px;
+      padding: 0 20px;
+      background: #fff;
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s linear;
+      margin: 7% auto;
+      letter-spacing: 0.05em;
+    }
+    /* Submits */
+    .submits {
+      width: 48%;
+      display: inline-block;
+      float: left;
+      margin-left: 2%;
+    }
+    /*       Forgot Password button FAF3DD  */
+    .frgt-pass {
+      background: transparent;
+    }
+    /*     Sign Up button  */
+    .sign-up {
+      background: #b8f2e6;
+    }
+    /* buttons hover */
+    button:hover {
+      transform: translatey(3px);
+      box-shadow: none;
+    }
+    /* buttons hover Animation */
+    button:hover {
+      animation: ani9 0.4s ease-in-out infinite alternate;
+    }
+    @keyframes ani9 {
+      0% {
+        transform: translateY(3px);
       }
-
-      .login {
-        position: relative;
-        height: 560px;
-        width: 405px;
-        margin: auto;
-        padding: 60px 60px;
-        background: url(https://picsum.photos/id/1004/5616/3744) no-repeat   center center #505050;
-        background-size: cover;
-        box-shadow: 0px 30px 60px -5px #000;
+      100% {
+        transform: translateY(5px);
       }
-
-      form {
-        padding-top: 80px;
-      }
-
-      .active {
-        border-bottom: 2px solid #1161ed;
-      }
-
-      .nonactive {
-        color: rgba(255, 255, 255, 0.2);
-      }
-
-      h2 {
-        padding-left: 12px;
-        font-size: 22px;
-        text-transform: uppercase;
-        padding-bottom: 5px;
-        letter-spacing: 2px;
-        display: inline-block;
-        font-weight: 100;
-      }
-
-      h2:first-child {
-        padding-left: 0px;
-      }
-
-      span {
-        text-transform: uppercase;
-        font-size: 12px;
-        opacity: 0.4;
-        display: inline-block;
-        position: relative;
-        top: -65px;
-        transition: all 0.5s ease-in-out;
-      }
-
-      .text {
-        border: none;
-        width: 89%;
-        padding: 10px 20px;
-        display: block;
-        height: 15px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 2px solid rgba(255, 255, 255, 0);
-        overflow: hidden;
-        margin-top: 15px;
-        transition: all 0.5s ease-in-out;
-      }
-
-      .text:focus {
-        outline: 0;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
-        background: rgba(0, 0, 0, 0);
-      }
-
-      .text:focus + span {
-        opacity: 0.6;
-      }
-
-      input[type="text"],
-      input[type="password"] {
-        font-family: 'Montserrat', sans-serif;
-        color: #fff;
-      }
-
-
-
-      input {
-        display: inline-block;
-        padding-top: 20px;
-        font-size: 14px;
-      }
-
-      h2,
-      span,
-      .custom-checkbox {
-        margin-left: 20px;
-      }
-
-      .custom-checkbox {
-        -webkit-appearance: none;
-        background-color: rgba(255, 255, 255, 0.1);
-        padding: 8px;
-        border-radius: 2px;
-        display: inline-block;
-        position: relative;
-        top: 6px;
-      }
-
-      .custom-checkbox:checked {
-        background-color: rgba(17, 97, 237, 1);
-      }
-
-      .custom-checkbox:checked:after {
-        content: '\2714';
-        font-size: 10px;
-        position: absolute;
-        top: 1px;
-        left: 4px;
-        color: #fff;
-      }
-
-      .custom-checkbox:focus {
-        outline: none;
-      }
-
-      label {
-        display: inline-block;
-        padding-top: 10px;
-        padding-left: 5px;
-      }
-
-      .signin {
-        background-color: #1161ed;
-        color: #FFF;
-        width: 100%;
-        padding: 10px 20px;
-        display: block;
-        height: 39px;
-        border-radius: 20px;
-        margin-top: 30px;
-        transition: all 0.5s ease-in-out;
-        border: none;
-        text-transform: uppercase;
-      }
-
-      .signin:hover {
-        background: #4082f5;
-        box-shadow: 0px 4px 35px -5px #4082f5;
-        cursor: pointer;
-      }
-
-      .signin:focus {
-        outline: none;
-      }
-
-      hr {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        top: 85px;
-        position: relative;
-      }
-
-      a {
-        text-align: center;
-        display: block;
-        top: 120px;
-        position: relative;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.2);
-      }
-    </style>
-  </head>
-  <body style="background: url(https://picsum.photos/id/1004/5616/3744) no-repeat   center center #505050">
-  $END$
-<%--  <div align="center">--%>
-<%--  <form action="/controller.Servlet" method="get">--%>
-<%--    <input type="hidden" name="action" value="login">--%>
-<%--  USERNAME <input type="text" name="username"><br/>--%>
-<%--  PASSWORD <input type="text" name="password">--%>
-<%--    <button type="submit">login</button>--%>
-<%--  </form>--%>
-<%--  </div>--%>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-
-  <div class="login">
-    <h2 class="active"> sign in </h2>
-
-    <h2 class="nonactive"> sign up </h2>
-    <form action="/Servlet" method="get">
-      <input type="hidden" name="action" value="login">
-
-
-
-      <input type="text" class="text" name="username">
-      <span>username</span>
-
+    }
+  </style>
+  <script>
+    function show() {
+      var p = document.getElementById("pwd");
+      p.setAttribute("type", "text");
+    }
+    function hide() {
+      var p = document.getElementById("pwd");
+      p.setAttribute("type", "password");
+    }
+    var pwShown = 0;
+    document.getElementById("eye").addEventListener(
+            "click",
+            function () {
+              if (pwShown == 0) {
+                pwShown = 1;
+                show();
+              } else {
+                pwShown = 0;
+                hide();
+              }
+            },
+            false
+    );
+  </script>
+</head>
+<body>
+<div class="overlay">
+  <form method="post" action="/check">
+    <div class="con">
+      <header class="head-form">
+        <h2>Log In</h2>
+        <p>login here using your username and password</p>
+      </header>
       <br>
-
-      <br>
-
-      <input type="password" class="text" name="password">
-      <span>password</span>
-      <br>
-
-      <input type="checkbox" id="checkbox-1-1" class="custom-checkbox" />
-      <label for="checkbox-1-1">Keep me Signed in</label>
-
-      <button class="signin">
-        Sign In
-      </button>
-
-
-      <hr>
-
-      <a href="#">Forgot Password?</a>
-    </form>
-
-  </div>
-  </body>
+      <div class="field-set">
+                <span class="input-item">
+          <i class="fa fa-user-circle"></i>
+        </span>
+        <input class="form-input" id="txt-input" type="text" placeholder="UserName" name="username" required>
+        <br>
+        <span class="input-item">
+          <i class="fa fa-key"></i>
+        </span>
+        <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>
+        <span>
+        </span>
+        <br>
+        <button type="submit" class="log-in"> Log In</button>
+      </div>
+      <p>${message}</p>
+      <div class="other">
+        <button class="btn submits frgt-pass" hidden>Forgot Password</button>
+        <a href="/user?action=create">
+          <button class="btn submits sign-up" type="button">Sign Up
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </button>
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
 </html>
