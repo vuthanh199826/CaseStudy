@@ -24,15 +24,15 @@ controller/Orders.java
  controller.Orders
 model/Comment.java
  model.Comment
-service/IUserDAO.java
- service.IUserDAO
-model/Post.java
- model.Post
 model/Order.java
  model.Order
-controller/UserController.java
- controller.UserController
+model/Post.java
+ model.Post
+service/IUserDAO.java
+ service.IUserDAO
 service/UserDAO.java
  service.UserDAO
 controller/CheckLogin.java
  controller.CheckLogin
+controller/UserController.java
+ controller.UserController

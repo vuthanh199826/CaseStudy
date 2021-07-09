@@ -10,7 +10,7 @@ public interface IUserDAO {
     User findByName(String name);
     User findUserByUserName(String name,String password);
     List<User> findListByName(String name);
-    void save(User user);
+    void save(User user) throws SQLException;
     void edit(String name ,User user);
     void delete( String name);;
     boolean login(String username, String password) throws SQLException;

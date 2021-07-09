@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(
@@ -114,14 +115,21 @@ public class UserController extends HttpServlet {
         user.setPhone(Integer.parseInt(req.getParameter("phone")));
         user.setRole(req.getParameter("role"));
 //        User user = new User(userName,password,name,address,phone,role);
-        userDAO.save(user);
-        showAll(req, resp);
+        try {
+            userDAO.save(user);
+        } catch (SQLException throwables) {
+            req.setAttribute("message","Ten User Đa Ton Tai");
+            showFormCreate(req, resp);
+            return;
+        }
+        RequestDispatcher dispatcher  = req.getRequestDispatcher("index.jsp");
+        dispatcher.forward(req, resp);
     }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("username");
         userDAO.delete(userName);
-        req.setAttribute("message", "Xóa Thành Công");
+        req.setAttribute("message", "Xoa Thanh Công");
         showAll(req, resp);
     }
 }

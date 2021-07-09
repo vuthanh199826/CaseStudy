@@ -117,24 +117,17 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void save(User user) {
+    public void save(User user) throws SQLException {
         String sql = "insert into user(userName,password,name,address,phone) values (?,?,?,?,?)";
         PreparedStatement preparedStatement = null;
-        try {
             preparedStatement = connection.prepareStatement(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        try {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getName());
             preparedStatement.setString(4, user.getAddress());
             preparedStatement.setInt(5, user.getPhone());
             preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
 
     }
 

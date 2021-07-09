@@ -256,7 +256,7 @@
             </div>
             <p>${message}</p>
             <div class="other">
-                <button class="btn submits frgt-pass">Forgot Password</button>
+                <button class="btn submits frgt-pass" hidden>Forgot Password</button>
                 <a href="/user?action=create">
                     <button class="btn submits sign-up" type="button">Sign Up
                                             <i class="fa fa-user-plus" aria-hidden="true"></i>

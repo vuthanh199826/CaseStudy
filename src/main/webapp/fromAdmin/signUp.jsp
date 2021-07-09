@@ -194,8 +194,8 @@
     <form method="post">
         <div class="con">
             <header class="head-form">
-                <h2>Log In</h2>
-                <p>login here using your username and password</p>
+                <h2>Sign Up</h2>
+<%--                <p>Sign Up here using your username and password</p>--%>
             </header>
             <br>
             <div class="field-set" style="text-align: center">
@@ -221,7 +221,8 @@
 <%--                <span>--%>
 <%--        </span>--%>
                 <br>
-                <button class="log-in"> Log In</button>
+                <button class="log-in"> Sign Up</button>
+                <b>${message}</b>
             </div>
             <%--            <div class="other">--%>
             <%--                <button class="btn submits frgt-pass">Forgot Password</button>--%>

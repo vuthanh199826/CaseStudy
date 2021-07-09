@@ -37,7 +37,7 @@ public class CheckLogin extends HttpServlet{
             requestDispatcher.forward(req,resp);
 //            resp.sendRedirect("/index.jsp");
         } else if (user.getRole() == null) {
-            resp.sendRedirect("");
+            resp.sendRedirect("/Posts");
         } else if (user.getRole().equalsIgnoreCase(admin)) {
             resp.sendRedirect("/user");
         }
