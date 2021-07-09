@@ -118,15 +118,16 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void save(User user) throws SQLException {
-        String sql = "insert into user(userName,password,name,address,phone) values (?,?,?,?,?)";
+        String sql = "insert into user(userName,password,name,address,phone,role) values (?,?,?,?,?,?)";
         PreparedStatement preparedStatement = null;
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getName());
-            preparedStatement.setString(4, user.getAddress());
-            preparedStatement.setInt(5, user.getPhone());
-            preparedStatement.executeUpdate();
+        preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, user.getUsername());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(3, user.getName());
+        preparedStatement.setString(4, user.getAddress());
+        preparedStatement.setInt(5, user.getPhone());
+        preparedStatement.setString(6, user.getRole());
+        preparedStatement.executeUpdate();
 
 
     }
@@ -199,8 +200,6 @@ public class UserDAO implements IUserDAO {
             return true;
         }
     }
-
-
 
 
 }

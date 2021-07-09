@@ -39,7 +39,6 @@
     </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #5e6472  !important;">
     <div class="container-fluid">
         <a class="navbar-brand" style="color: red" href="/user">Home</a>
@@ -86,7 +85,7 @@
 </nav>
 
 <div align="center" style="margin-top: 50px">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <tr style="background: burlywood">
             <td>USERNAME</td>
             <td>Password</td>
@@ -108,16 +107,8 @@
                 <td>
                     <form action="/user" method="post">
                         <input type="text" name="username" value="${l.username}" hidden>
-                        <input type="text" name="action" value="update" hidden>
-                            <button>Update</button>
-                        </a>
-                    </form>
-                </td>
-                <td>
-                    <form action="/user" method="post">
-                        <input type="text" name="username" value="${l.username}" hidden>
                         <input type="text" name="action" value="delete" hidden>
-                        <button type="submit">delete</button>
+                        <button class="btn btn-outline-secondary" type="submit">delete</button>
                     </form>
                 </td>
             </tr>

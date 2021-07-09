@@ -1,7 +1,7 @@
 package service;
 
 import model.Order;
-import service.connection.ConnectJDBC;
+import service.connection.ConnectionJDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class OrderDAO implements IOrderDAO{
 //        }
 //        return connection;
 //    }
-private Connection connection = ConnectJDBC.getConnection();
+private Connection connection = ConnectionJDBC.getConnection();
 
 
     public OrderDAO(){};

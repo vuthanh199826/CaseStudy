@@ -1,7 +1,7 @@
 package service;
 
 import model.Comment;
-import service.connection.ConnectJDBC;
+import service.connection.ConnectionJDBC;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CommentDAO implements ICommentDAO{
 
-    private Connection connection = ConnectJDBC.getConnection();
+    private Connection connection = ConnectionJDBC.getConnection();
 
     public CommentDAO() {
     }
